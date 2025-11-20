@@ -9,20 +9,31 @@ import SwiftUI
 import Kingfisher
 
 struct ShowMainCard: View {
+    
+    fileprivate enum ShowMainCardConstants {
+        
+        static let mainWidth: CGFloat = 135
+        static let mainSpacing: CGFloat = 10
+        static let textSpacing: CGFloat = 8
+        
+        static let imageSize: CGSize = .init(width: 135, height: 180)
+        static let imageRadius: CGFloat = 7
+    }
+    
     let ongoingShow: OngoingShow
     
     var body: some View {
         
         Button(action: {
             //TODO: - 연결 추가
-        }) {
+        }, label: {
             VStack(alignment: .leading) {
                 urlImage
-                Spacer() .frame(height:10)
+                Spacer() .frame(height: ShowMainCardConstants.mainSpacing)
                 showInfo
             }
-            .frame(width: 135)
-        }
+            .frame(width: ShowMainCardConstants.mainWidth)
+        })
     }
     
     //MARK: - 공연 이미지
@@ -39,31 +50,30 @@ struct ShowMainCard: View {
                 }
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 135, height: 180)
-                .clipShape(RoundedRectangle(cornerRadius: 7))
+                .frame(width: ShowMainCardConstants.imageSize.width, height: ShowMainCardConstants.imageSize.height)
+                .clipShape(RoundedRectangle(cornerRadius: ShowMainCardConstants.imageRadius))
                 .clipped()
         }
     }
     
     //MARK: - 공연 정보
     private var showInfo : some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: ShowMainCardConstants.textSpacing) {
             Text(ongoingShow.showName)
                 .font(.mainTextMedium16)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.grayColorA)
                 .multilineTextAlignment(.leading) //텍스트 무조건 왼쪽 정렬되도록!
                 .lineLimit(2) ///두 줄 고정
                 .truncationMode(.tail) ///길면 뒷부분 잘리게
-                .frame(height: 40)
         
             Text(ongoingShow.hallName)
                 .font(.mainTextMedium15)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.grayColorC)
                 .multilineTextAlignment(.leading)
                 
             Text("\(ongoingShow.startDate)~\(ongoingShow.endDate)")
                 .font(.mainTextMedium13)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.grayColorF)
                 .multilineTextAlignment(.leading)
         }
     }

@@ -9,27 +9,41 @@ import SwiftUI
 import Kingfisher
 
 struct UserMainRankingCard: View {
+    
+    fileprivate enum UserMainRankingCardConstants {
+        
+        static let mainSpacing: CGFloat = 30
+        static let textSpacing: CGFloat = 10
+        
+        static let backgroundSize: CGSize = .init(width: 153, height: 230)
+        static let imageSize: CGSize = .init(width: 100, height: 100)
+        
+        static let rectangleRadius: CGFloat = 18
+    }
+    
     let userRanking: UserRanking
     
     var body: some View {
         Button(action: {
             //TODO: - 연결 추가
         }, label: {
+            
             ZStack{
-                RoundedRectangle(cornerRadius: 18)
+                RoundedRectangle(cornerRadius: UserMainRankingCardConstants.rectangleRadius)
                     .fill(Color.white)
-                    .frame(width:153, height: 230)
+                    .frame(width: UserMainRankingCardConstants.backgroundSize.width, height:  UserMainRankingCardConstants.backgroundSize.height)
                     .shadow(color: Color(red: 0.29, green: 0.29, blue: 0.29).opacity(0.3), radius: 4, x: 0, y: 2)
+                
                 
                 VStack {
                     urlImage
-                    Spacer() .frame(height:30)
+                    Spacer() .frame(height: UserMainRankingCardConstants.mainSpacing)
                     performerInfo
                 }
             }
             .padding(4)
         })
-        //.buttonStyle(.glass)
+       // .buttonStyle(.glass)
     }
     
     //MARK: - 프로필 이미지
@@ -46,7 +60,7 @@ struct UserMainRankingCard: View {
                 }
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
+                .frame(width: UserMainRankingCardConstants.imageSize.width, height: UserMainRankingCardConstants.imageSize.height)
                 .clipShape(Circle())
         }
     }
@@ -56,13 +70,13 @@ struct UserMainRankingCard: View {
         VStack {
             Text(userRanking.nickname)
                 .font(.mainTextMedium16)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.grayColorA)
             
-            Spacer() .frame(height:10)
+            Spacer() .frame(height: UserMainRankingCardConstants.textSpacing)
             
             Text(userRanking.instruction)
                 .font(.mainTextMedium14)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.grayColorF)
         }
     }
 }

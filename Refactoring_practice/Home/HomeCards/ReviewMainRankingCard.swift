@@ -24,7 +24,7 @@ struct ReviewMainRankingCard: View {
     var body: some View {
         Button(action: {
             //TODO: - 연결 추가
-        }) {
+        }, label: {
             ZStack (alignment: .bottomLeading){
                 backgroundUrlImage
                 HStack {
@@ -33,7 +33,8 @@ struct ReviewMainRankingCard: View {
                 }
                 .padding()
             }
-        }
+        })
+        //.buttonStyle(.glass)
     }
     
     //MARK: - 배경 리뷰 이미지
@@ -50,7 +51,7 @@ struct ReviewMainRankingCard: View {
                 }
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 190, height: 275)
+                .frame(width: ReviewMainRankingCardConstants.backgroundImageSize.width, height: ReviewMainRankingCardConstants.backgroundImageSize.height)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
@@ -69,7 +70,7 @@ struct ReviewMainRankingCard: View {
                 }
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 29, height: 29)
+                .frame(width: ReviewMainRankingCardConstants.profileImageSize.width, height: ReviewMainRankingCardConstants.profileImageSize.height)
                 .clipShape(Circle())
         }
     }
@@ -79,7 +80,7 @@ struct ReviewMainRankingCard: View {
         VStack{
             Text(reviewRanking.nickname)
                 .font(.mainTextMedium14)
-                .foregroundStyle(.white)
+                .foregroundStyle(.grayColorJ)
         }
     }
 }
